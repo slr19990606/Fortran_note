@@ -74,7 +74,7 @@ Fortran语句大致有三种类型：
 ## 4.语法之数据类型与浮点数
 ### 4.1 数据类型
 #### Fortran标准数据类型
-<font color='red'> Fortan不区分大小写 </font>
+<mark> Fortan不区分大小写 <mark>
 
     Integer(Kind=??) ::                 整型
     Real(Kind=??) ::                    实型/浮点型
@@ -82,20 +82,20 @@ Fortran语句大致有三种类型：
     Logical(Kind=??) ::                 逻辑型/布尔型
     Character(Kind=1,len=??) ::         字符型(.true.   or   .false.)
     Type(??) ::                         派生类型（上述类型的组合）
-<font color='red'> 数据除了有类型外，还有一定的属性。他们用定义时的形容词来赋予。在使用浮点数时，即使没有小数部分，也要加上小数点。 </font>
+<mark> 数据除了有类型外，还有一定的属性。他们用定义时的形容词来赋予。在使用浮点数时，即使没有小数部分，也要加上小数点。 <mark>
 
 形容词parameter代表这个数据有常数的属性。
 
 ### 4.2 Kind
 Kind的正式名字叫“种别”，是区分同一种数据类型，但不同长度、或精度、或编码方式的一种代号。他在编译时决定！
-<font color='red'> Kind对不同的变量类型，表达的意思也不相同 </font>
+<mark> Kind对不同的变量类型，表达的意思也不相同 <mark>
 
     对Integer,Kind值影响整数能表达的最大范围。
     对Real和Complex,Kind值影响实数的最大范围和最小精度。
     对Character,Kind值表示编码。通常为ASCII编码。
     对Logical,Kind值表示长度，对逻辑型无影响。
 
-<font color='red'> ①Integer的Kind，常见1、2、4、8等 </font>
+<mark> ①Integer的Kind，常见1、2、4、8等 <mark>
                       
                       最小值                  最大值
     1    超短整型    -(2^7)                   2^7-1
@@ -110,7 +110,7 @@ Kind的正式名字叫“种别”，是区分同一种数据类型，但不同�
     对于大多数编译器，Kind默认是4，占有4个字节。同时，并不是所有的编译器都支持1、2、4、8的Kind值。
 k=Selected_Int_Kind(i)可以用这个函数来选择能满足要求的Kind。i表示需要最大的十进制位数，k表示返回的能满足范围的最小的Kind值。
 
-<font color='red'> ②Real的Kind，常见4、8、16等 </font>
+<mark> ②Real的Kind，常见4、8、16等 <mark>
 
                            最大值               最小精度 
     4       实型         3.4028235E+38          1.1754944E-38
@@ -120,17 +120,17 @@ k=Selected_Int_Kind(i)可以用这个函数来选择能满足要求的Kind。i�
     对于大多数编译器，Kind默认是4，占有4个字节。并不是所有编译器都允许4、8、16的Kind值。
 k=Selected_Real_Kind(r,p)可以用这个函数来选择能满足要求的Kind。r表示需要最大的十进制位数，p表示最小的有效位数，k表示返回的能满足范围的最小的Kind值。
 
-<font color='red'>③Complex的数据类型与Real一致。 </font>
+<mark>③Complex的数据类型与Real一致。 <mark>
 
     需要注意：
         如果Kind=8的Real占用8字节，则Kind=8的Complex占有16字节。
         Complex选择Kind，也使用Selected_Real_Kind函数。
 
-<font color='red'>④Character的Kind </font>
+<mark>④Character的Kind <mark>
 
     Character的Kind，常见只有一种，即1表示ASCII编码，通常忽略。
 
-<font color='red'>⑤Logical的Kind </font>
+<mark>⑤Logical的Kind </mark>
 
     Logical的Kind通常与该编译器支持的Integer一致，通常忽略，在大多数编译器上，Kind=4，占有4字节。
     任何Kind值的Logical都只能表示真、假两个状态。
@@ -144,23 +144,23 @@ k=Selected_Real_Kind(r,p)可以用这个函数来选择能满足要求的Kind。
 
 例如：1/2=0；3/2=1
 
-<font color='red'>因此，推荐在浮点数的表达式中，尽量把常数写成浮点数 </font>
+<mark>因此，推荐在浮点数的表达式中，尽量把常数写成浮点数 <mark>
 
 #### 字符型：
 需要注意字符串定义时必须有长度，且通常是固定的。
 
 Fortran的字符串没有结束符\0，所以在字符串操作中，必须注意！
 
-<font color='red'>字符串拼接起来用// </font>
+<mark>字符串拼接起来用// <mark>
 
 有必要时需使用trim去除尾部空格
 
-<font color='red'>可通过内部文件在字符串和整型、实型间相互转化。 </font>
+<mark>可通过内部文件在字符串和整型、实型间相互转化。 <mark>
     
     read(字符串, *)整型或实型变量                    字符串->数字
     write(字符串，*)整型或实型变量                   数字->字符串
 
-<font color='red'>字符型允许使用“子字符串”表示字符串的一部分 </font>
+<mark>字符型允许使用“子字符串”表示字符串的一部分 <mark>
 
     character(len=12) :: c="www.?????.cn"
     c(5:9)="fcode"          !// 此时c="www.fcode.cn"
@@ -170,7 +170,7 @@ Fortran的字符串没有结束符\0，所以在字符串操作中，必须注�
 ### 4.4 浮点数
 浮点数包含实型(Real)和复型(Complex)。计算机中浮点数的规则有很多，其中应用最多的时IEEE标准。其他的如IBM标准。正如我们用科学计数法表达实数一样，计算机也使用二进制的科学计数法表达实数。
 
-<font color='red'>IEEE浮点规则： </font>
+<mark>IEEE浮点规则： <mark>
 
     科学计数法                     二进制科学计数法
     +6.022141290E+23               0x424A0000
@@ -195,7 +195,7 @@ Fortran的字符串没有结束符\0，所以在字符串操作中，必须注�
 
 HUGEVAL是一个内置常量，它表示浮点数的最大可能值。它的值取决于所使用的浮点数类型。HUGEVAL 常量通常用于比较浮点数变量的大小，或者用于初始化变量为一个较大的值。
 
-<font color='red'>由于浮点数存在误差，因此，应尽量避免以下操作：</font>
+<mark>由于浮点数存在误差，因此，应尽量避免以下操作：<mark>
 
     1.对浮点数进行相等判断！
     if (a==1.3)        =>          if(abs(a-1.3)<1.0e-5>)
@@ -225,7 +225,7 @@ If复杂结构：
         ...
     end if
 
-<font color='red'>在判断两个数组的元素是否相等时可以使用all或any函数，all函数用于判断两个数组的所有元素完全相同，any函数用于判断两个数组的元素至少有一个相同。 </font>
+<mark>在判断两个数组的元素是否相等时可以使用all或any函数，all函数用于判断两个数组的所有元素完全相同，any函数用于判断两个数组的元素至少有一个相同。 <mark>
 
 select case基本结构：
 
@@ -286,26 +286,26 @@ do while 循环结构：（当满足条件时一直循环）
     类（class, type derived）
 
 ### 6.2 数组
-<font color='red'>分类： </font>
+<mark>分类： <mark>
     
     ①固定大小数组
         静态数组（声明）
         自动数组（传参）
     ②动态分配数组（关键字：allocate、deallocate）
 
-<font color='red'>数组的定义： </font>
+<mark>数组的定义： <mark>
 
     type, dimension(bound) [,attr] :: name 或
     type [,attr] :: name(bound)
 
-<font color='red'>数组的访问方式： </font>
+<mark>数组的访问方式： <mark>
 
     整体 ARR=1(整体赋值)
     元素 ARR(1)=-1（单个元素赋值）
     片段 ARR(2:4)=10 (切片赋值)
     不连续段 (类似于切片)
 
-<font color='red'>数组的常用函数： </font>
+<mark>数组的常用函数： <mark>
 
     SQRT(num) : 求方根函数
     DOT_PRODUCT(VECTOR_A, VECTOR_B) : 点积
@@ -316,7 +316,7 @@ do while 循环结构：（当满足条件时一直循环）
     MAXVAL(ARRAY [,DIM] [,MASK]) : 求数组最大元素的值
 
 ### 6.3 结构体
-<font color='red'>结构体的定义： </font>
+<mark>结构体的定义： <mark>
 
     TYPE [[,attr-list] ::] name [(type-param-name-list)]
         [type-param-def-stmts]
@@ -325,7 +325,7 @@ do while 循环结构：（当满足条件时一直循环）
         [type-bound-procedure-part]
     END TYPE [name]
 
-<font color='red'>结构体的访问方式： </font>
+<mark>结构体的访问方式： <mark>
 
     TYPE%MEM
 
@@ -363,7 +363,7 @@ do while 循环结构：（当满足条件时一直循环）
         [return]
     end [Subroutine [名称]]
 
-<font color='red'>函数和子例行程序的区别： </font>
+<mark>函数和子例行程序的区别： <mark>
 
           函数                            子例行程序
         有返回值                           无返回值
@@ -379,7 +379,7 @@ do while 循环结构：（当满足条件时一直循环）
 ### 7.3 传递数组和结构体
 传递数组有三种方式：自动数组、假定大小、假定形状
 
-<font color='red'>自动数组： </font>
+<mark>自动数组： <mark>
 
     Subroutine sub(a,m,n)
         Integer m, n
@@ -387,14 +387,14 @@ do while 循环结构：（当满足条件时一直循环）
         a=2
     End Subroutine sub !只传递地址，维度由定义确定，各维度上下限由其它虚参确定。
 
-<font color='red'>假定大小： </font>
+<mark>假定大小： <mark>
 
     Subroutine sub(a)
         Real a(*)
         a(1:6)=1
     End Subroutine sub !只传递地址，虚参只能是一维。下限为1，不传递上限。
 
-<font color='red'>假定形状： </font>
+<mark>假定形状： <mark>
 
     Subroutine sub(a)
         Real a(:,:)
@@ -404,7 +404,7 @@ do while 循环结构：（当满足条件时一直循环）
 传递结构体时需要注意，即便两个结构体完全一模一样，但是其定义是分别独立的，编译器也认为不是同一类。因此，虚参和实参如果传递结构体，必须是由同一个定义type得到的结构体实例。需在module中定义结构体，分别在主函数和子例行程序中使用。
 
 ### 7.4 特殊用法
-<font color='red'>变量的save属性： </font>
+<mark>变量的save属性： <mark>
 函数的局部变量具有“临时性”，即在函数返回后，局部变量被收回，下次进入时，其值不确定。save属性可以指定一部分变量可以在函数返回后“存活”下来，下次进入同一个子程序，保持上一次的值。
 
 例子：
@@ -412,7 +412,7 @@ do while 循环结构：（当满足条件时一直循环）
     Integer , save :: var
     Integer :: var = 0 !定义时初始化值，也具有save属性
 
-<font color='red'>虚参的Intent属性： </font>
+<mark>虚参的Intent属性： <mark>
 
 明确指定虚参的目的：
 
@@ -424,15 +424,15 @@ do while 循环结构：（当满足条件时一直循环）
     Integer , Intent(INOUT) :: neuter_arg
     Integer :: neuter_arg ！未指定 Intent则为中性 
 
-<font color='red'>虚参的value属性： </font>指定该参数为传值参数，而非传址参数。
+<mark>虚参的value属性： <mark>指定该参数为传值参数，而非传址参数。
 
     ！传值参数，只能作为输入参数。改变后不影响实参
     Integer , value :: by_value_arg
 
-<font color='red'>可选参数optional： </font>
+<mark>可选参数optional： <mark>
 函数的某些参数在某些情况下，可以不赋予！运行时动态决定参数的个数
 
-<font color='red'>result后缀： </font>旨在通过对返回值重命名以便于理解或书写
+<mark>result后缀： <mark>旨在通过对返回值重命名以便于理解或书写
 
 ## 8 Module
 ### 8.1 Interface
@@ -445,7 +445,7 @@ Interface规定了函数的调用方式、各参数的传递方式、详细信�
     参数具有intent、value属性
     参数有可选参数、改变参数顺序
 
-<font color='red'>Interface书写形式</font>：（Interface需要包含在每一个调用者函数中）
+<mark>Interface书写形式<mark>：（Interface需要包含在每一个调用者函数中）
 
     Interface
         内容
@@ -479,15 +479,15 @@ Module可以被继承，即modA可以usemodB，从而获得modB向外提供的�
     Module monitorsys
         use smartHome, only : screen => tv , pc  !只使用tv和pc变量，并将tv改名为screen
 
-<font color='red'>module会降低程序编译效率</font>
+<mark>module会降低程序编译效率<mark>
 
 ### 8.3 特殊用法
-<font color='red'>统一接口：</font>
+<mark>统一接口：<mark>
 利用统一接口可以把多个子程序捆绑成一个名字，由编译器根据实参的情况，决定到底调用哪一个。
 
 ![demo](./picture/fortran_pic/interface_demo.jpg)
 
-<font color='red'>自定义操作符</font>
+<mark>自定义操作符<mark>
 
 ![demo](./picture/fortran_pic/operator_demo.jpg)
 
@@ -510,7 +510,7 @@ Module可以被继承，即modA可以usemodB，从而获得modB向外提供的�
                                             （非常方便，强大）
 
 ### 9.2 顺序读写有格式文件
-<font color='red'>Open打开文件：</font>
+<mark>Open打开文件：<mark>
 
     Open(子句=值, 子句=值, 子句=值)
     它具有二十多个子句，每一个都有各自的作用
@@ -525,7 +525,7 @@ Module可以被继承，即modA可以usemodB，从而获得modB向外提供的�
     integer :: FILE_IN
     Open(NewUnit=FILE_IN, file="2d_text.txt")
 
-<font color='red'>Read/Write读取文件：</font>
+<mark>Read/Write读取文件：<mark>
 
     Read/Write(文件通道号, *)变量列表
 
@@ -535,7 +535,7 @@ Module可以被继承，即modA可以usemodB，从而获得modB向外提供的�
 
 Backspace(通道号)可以退回一行。
 
-<font color='red'>Close关闭文件：</font>
+<mark>Close关闭文件：<mark>
 
     Close(文件通道号)
 
@@ -563,7 +563,7 @@ Backspace(通道号)可以退回一行。
     rec=5表示读取第5笔记录
     （因为我们的RecL=64，每行是64字节，因此Rec=5对应文件的第5行，即第257个字节）
 
-<font color='red'>由于定义格式经常会出错，因此可以先用字符串str读取，然后再从字符串中用表控格式读取数据，可以避免格式错误，例：</font>
+<mark>由于定义格式经常会出错，因此可以先用字符串str读取，然后再从字符串中用表控格式读取数据，可以避免格式错误，例：<mark>
 
     Program pcm
         Implicit None
@@ -599,7 +599,7 @@ Backspace(通道号)可以退回一行。
 
 ## 10 标准函数
 ### 10.1 数学数值函数
-<font color='red'>类型转换函数：</font>
+<mark>类型转换函数：<mark>
 
     r=real(x) 把x转换成real类型
         r=real(x,kind=8)把x转换成kind=8的real类型(双精度)
@@ -612,12 +612,12 @@ Backspace(通道号)可以退回一行。
         r=cmplx(a,b,kind=8)
         如果a b都是常数，也可以写成c=(1.0,2.0)
 
-<font color='red'>内部文件转换：</font>
+<mark>内部文件转换：<mark>
 
     write(字符串,*)其它数值           其他类型转字符串
     read(字符串,*)其它数值            字符串转其它类型
 
-<font color='red'>一般数值函数：</font>
+<mark>一般数值函数：<mark>
 
     i=ceilng(x)  天花板函数，返回大于等于x的最小整数(kind)
     i=floor(x)   地板函数，返回小于等于x的最大整数(kind)
@@ -627,21 +627,21 @@ Backspace(通道号)可以退回一行。
     i=min(i1,i2,i3,i4....)   最小值函数
     i=mod(a,b)               取余数函数
 
-<font color='red'>其他数学函数：</font>
+<mark>其他数学函数：<mark>
 
     r=log(r)        自然对数函数
     r=log10(r)      对数10为底函数
     r=exp(r)        自然对数指数函数
     r=sqrt(r)       平方根函数
 
-<font color='red'>向量矩阵数学函数：</font>
+<mark>向量矩阵数学函数：<mark>
 
     c=dot_product(a,b)        内积函数
     b=transpose(a)            把m*n矩阵转置为n*m矩阵
     c=matmul(a,b)             m*n矩阵与n*l矩阵相乘，得m*l矩阵
 
 ### 10.2 字符串和数组函数
-<font color='red'>字符串函数：</font>
+<mark>字符串函数：<mark>
 
     str=trim(str)   去掉字符串尾部的空格(返回短的字符串)
     str=adjustl(str)  左对齐字符串(返回字符串长度不变)
@@ -665,7 +665,7 @@ Backspace(通道号)可以退回一行。
     
     i=Vertify(c, cf[,back]) 在字符串c中查找不属于cf中的字符，返回第一次出现的位置
 
-<font color='red'>数组函数：</font>
+<mark>数组函数：<mark>
 
     b=reshape(array, shape)  重新设置数组的外形
     b=all(array [,dim])      判断逻辑数组元素是否全为真
@@ -713,7 +713,7 @@ getarg函数：(获取命令行参数)
     
     注：w-宽度，m-最小宽度，d-小数位数，e-指数位数
 
-<font color='red'>所有的格式只针对一个数据，如果想要多个数据在同一行输出，需在格式前加数字，表示格式乘的倍数。</font>
+<mark>所有的格式只针对一个数据，如果想要多个数据在同一行输出，需在格式前加数字，表示格式乘的倍数。<mark>
 
 ## 12 指针
 fortran中的指针可以指向变量和函数。在声明指针时，要加上pointer关键词，在声明被指向变量时，要加上target关键词。声明完成后，可以在主程序中用=>运算符对指针赋值。（指针的含义是将被指向变量的地址赋值给指针，当指针变化时，对应的变量值也发生变化）例：
@@ -725,7 +725,7 @@ fortran中的指针可以指向变量和函数。在声明指针时，要加上p
 
     procedure(functionName), pointer :: p_func
 
-<font color='red'>创建函数指针以后，如果有多个函数且它们具有同样的输入参数，则该指针可以指向任意一个函数。</font>
+<mark>创建函数指针以后，如果有多个函数且它们具有同样的输入参数，则该指针可以指向任意一个函数。<mark>
 
 指针也可以指向同一类型的指针，当指向一个指针时，当前指针会指向被指向指针所指向的目标。因此，当被指向指针改变后，当前指针并不会跟随被指向指针改变其指向目标的地址。
 
@@ -757,7 +757,7 @@ MPI并行简单fortran脚本：
     
     call MPI_BARRIER(MPI_COMM_WORLD, ierr)
 
-<font color='red'>在Fortran中，MPI_REDUCE函数是用于在MPI并行程序中执行归约操作的函数。它的一般语法如下：</font>
+<mark>在Fortran中，MPI_REDUCE函数是用于在MPI并行程序中执行归约操作的函数。它的一般语法如下：<mark>
 
 
 ```fortran
@@ -802,7 +802,7 @@ end program mpi_reduce_example
 在这个例子中，每个进程将自己的排名加1后发送给根进程，根进程使用MPI_SUM操作将所有排名的和归约到recvbuf中，并打印出结果。
 
 ```
-<font color='red'>在Fortran中，MPI_BCAST函数是MPI（Message Passing Interface）库中的一个函数，用于在多个进程之间广播数据。它的基本语法如下：</font>
+<mark>在Fortran中，MPI_BCAST函数是MPI（Message Passing Interface）库中的一个函数，用于在多个进程之间广播数据。它的基本语法如下：<mark>
 ```fortran
 MPI_BCAST(buffer, count, datatype, root, comm, ierr)
 ```
@@ -939,7 +939,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     3.关于__cplusplus宏的定义
     g++会自动定义__cplusplus宏，但是这个不影响它去编译C程序
     gcc需要根据后缀判断是否需要定义__cplusplus宏
-<font color='red'>综上所述：</font>
+<mark>综上所述：<mark>
 
     1.不管是gcc还是g++都可以编译C程序，编译程序的参数和规则都相同
     2.g++可以直接编译C++程序，gcc如果想要编译C++程序需要添加额外参数-lstdc++
@@ -950,7 +950,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 ### 15.1 什么是lib(静态库)和dll(动态链接库)？
 静态库lib就是先把部分源代码编译，并打包成静态库，以后的工程直接链接。
 
-<font color='red'>静态库的命名规则：</font>
+<mark>静态库的命名规则：<mark>
 
     在linux中，静态库以lib作为前缀，以.a作为后缀，中间是库的名字，自己指定即可，即libxxx.a
     在windows中，静态库一般以lib作为前缀，以lib作为后缀，中间库的名字需要自己指定，即libxxx.lib
@@ -959,12 +959,12 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 
 动态链接库是目标文件的集合，目标文件在动态链接库中的组织方式是按照特殊方式形成的。库中函数和变量的地址使用的是相对地址（静态库中使用的是绝对地址），其真实地址是在应用程序加载动态库时形成的。
 
-<font color='red'>动态库的命名规则：</font>
+<mark>动态库的命名规则：<mark>
 
     在Linux中动态库以lib作为前缀，以.so作为后缀，中间是库的名字，自己指定即可，即libxxx.so
     在windows中，动态库一般以lib作为前缀，以dll作为后缀，中间是库的名字，自己指定即可，即libxxx.dll
 
-<font color='red'>动态库具有执行权限，静态库没有执行权限</font>
+<mark>动态库具有执行权限，静态库没有执行权限<mark>
 
 源代码，lib和dll各有自己的特点：
 
@@ -982,7 +982,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 ### 15.2 生成和使用静态链接库
 生成静态库，需要对源文件进行汇编操作(使用参数-c)得到二进制格式的目标文件(.o格式)，然后通过ar工具将目标文件打包就可以得到静态库文件(libxxx.a)
 
-<font color='red'>使用ar工具创建静态库的时候需要三个参数：</font>
+<mark>使用ar工具创建静态库的时候需要三个参数：<mark>
 
     参数c:创建一个库，不管库是否存在，都将创建
     参数s:创建目标文件索引，这在创建较大的库时能加快时间
@@ -990,7 +990,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 
 ![demo](./picture/fortran_pic/lib_process.png)
 
-<font color='red'>生成静态库的具体步骤：</font>
+<mark>生成静态库的具体步骤：<mark>
 
     1.需要将源文件进行汇编，得到.o文件，需要使用参数-c
     gcc *.c(源文件) -c
@@ -1000,7 +1000,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     (1)提供头文件 **.h
     (2)提供制作出来的静态库 libxxx.a
 
-<font color='red'>静态库的使用：</font>
+<mark>静态库的使用：<mark>
 
     假设现在存在静态库libcalc.a,头文件head.h和测试程序main.c。
 
@@ -1015,7 +1015,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 
 ![demo](./picture/fortran_pic/dll_process.png)
 
-<font color='red'>生成动态库的具体步骤：</font>
+<mark>生成动态库的具体步骤：<mark>
 
     1.将源文件进行汇编操作，需要使用参数-c,还需要添加额外参数-fPIC(-fpic)
     gcc *.c(源文件) -c -fpic
@@ -1025,7 +1025,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     (1)提供头文件 **.h
     (2)提供制作出来的动态库 libxxx.so
 
-<font color='red'>动态库的使用：</font>
+<mark>动态库的使用：<mark>
 
     假设现在存在动态库libcalc.so,头文件head.h和测试程序main.c。
 
@@ -1034,11 +1034,11 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 
 ### 15.4 动态库的工作原理以及动态链接器如何搜索动态库
 #### 15.4.1 库的工作原理
-<font color='red'>静态库如何被加载：</font>
+<mark>静态库如何被加载：<mark>
 
     在程序编译的最后一个阶段也就是链接阶段，提供的静态库会被打包到可执行程序中。当可执行程序被执行时，静态库中的代码也会一并被加载到内存中，因此不会出现静态库找不到无法被加载的问题。
 
-<font color='red'>动态库如何被加载：</font>
+<mark>动态库如何被加载：<mark>
 
     1.在程序编译的最后一个阶段也就是链接阶段：
         在gcc命令中虽然指定了库路径（使用参数-L），但是这个路径并没有记录到可执行程序中，只是检查了这个路径下的库文件是否存在。
@@ -1058,7 +1058,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 
 按照以上顺序，依次搜索，找到之后结束遍历，最终还是没找到，动态链接器就会提示动态库找不到的错误信息。
 
-<font color='red'>ldd命令：</font>
+<mark>ldd命令：<mark>
 当使用动态库生成可执行程序以后，可以使用ldd命令检查生成的可执行程序所需动态库是否完成链接
 
     用法：
@@ -1067,7 +1067,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 ### 15.5 解决应用程序无法链接到动态库的问题
 可执行程序生成以后，根据动态链接器的搜索路径，我们可以提供三种解决方案，我们只需要将动态库的路径放到对应的环境变量或者系统配置文件中，同样也可以将动态库拷贝到系统库目录（或者将动态库的软链接文件放在这些系统库目录中）
 
-<font color='red'>方案1：将库路径添加到环境变量LD_LIBRARY_PATH中</font>
+<mark>方案1：将库路径添加到环境变量LD_LIBRARY_PATH中<mark>
 
     1.找到相关的配置文件
     用户级别：~/.bashrc ---> 设置对当前用户有效
@@ -1080,7 +1080,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     不想执行上面的操作，可以执行一个命令让配置重新被加载：
         source ~/.bashrc
     
-<font color='red'>方案2：更新/etc/ld.so.cache文件(ld.so.cache为二进制文件，无法直接修改，需要修改它对应的ld.so.conf文本文件)</font>
+<mark>方案2：更新/etc/ld.so.cache文件(ld.so.cache为二进制文件，无法直接修改，需要修改它对应的ld.so.conf文本文件)<mark>
 
     1.找到动态库所在的绝对路径（不包括库的名字）比如：/home/robin/Library/
     2.使用vim修改/etc/ld.so.conf这个文件，将上边的路径添加到文件中（独自占一行）
@@ -1089,7 +1089,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     3.更新/etc/ld.so.conf中的数据到/etc/ld.so.cache中
         sudo ldconfig
     
-<font color='red'>方案3：拷贝动态库文件到系统库目录/lib/或者/usr/lib中（或者将库的软链接文件放进去）</font>
+<mark>方案3：拷贝动态库文件到系统库目录/lib/或者/usr/lib中（或者将库的软链接文件放进去）<mark>
 
     #库拷贝
     sudo cp /xxx/xxx/libxxx.so /usr/lib
@@ -1099,12 +1099,12 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 
 ### 15.5 动态库和静态库的优缺点
 #### 15.5.1 静态库
-<font color='red'>优点：</font>
+<mark>优点：<mark>
 
     1.静态库被打包到应用程序中加载速度快
     2.发布程序无需提供静态库，移植方便
 
-<font color='red'>缺点：</font>
+<mark>缺点：<mark>
 
     1.相同的库文件数据可能在内存中被加载多份，消耗系统资源，浪费内存
     2.库文件更新需要重新编译项目文件，生成新的可执行程序，浪费时间
@@ -1112,13 +1112,13 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
 ![demo](./picture/fortran_pic/lib_disadvantage.png)
 
 #### 15.5.2 动态库
-<font color='red'>优点：</font>
+<mark>优点：<mark>
 
     1.可实现不同进程间的资源共享
     2.动态库升级简单，只需替换库文件，无需重新编译应用程序
     3.程序员可以控制何时加载动态库，不调用库函数动态库不会被加载
 
-<font color='red'>缺点：</font>
+<mark>缺点：<mark>
 
     1.加载速度比静态库慢，以现在计算机的性能可以忽略
     2.发布程序需要提供依赖的动态库
@@ -1172,14 +1172,14 @@ Make会自动查找makefile文件，查找顺序为GNUmakefile > makefile > Make
         main:
             @echo main
 
-<font color='red'>一般来说，目标名就是最终执行后生成的文件名，但有的目标名只是我iele执行其他的操作，被成为伪目标，例如：clean</font>
+<mark>一般来说，目标名就是最终执行后生成的文件名，但有的目标名只是我iele执行其他的操作，被成为伪目标，例如：clean<mark>
 
 一般在Makefile中，使用.PHONY声明伪目标，例：
 
     .PHONY: clean
     (说明当Makefile所在的文件夹存在名为clean的其他文件时，忽略这个文件，执行伪目标对应的操作)
 
-<font color='red'>同时，如果一个目标每次都需要执行，则可以将其声明为伪目标，这样在每次编译的时候都会执行</font>
+<mark>同时，如果一个目标每次都需要执行，则可以将其声明为伪目标，这样在每次编译的时候都会执行<mark>
 
 ### 16.4 依赖类型
 1.普通依赖
@@ -1205,7 +1205,7 @@ Make会自动查找makefile文件，查找顺序为GNUmakefile > makefile > Make
     .ONESHELL
 这样所有的指令都会同一次在shell中执行
 
-<font color='red'>回显部分：</font>
+<mark>回显部分：<mark>
 通常make在执行一条shell语句前都会先打印这条语句，如果不想打印可以在语句开头加@，例：
 
     @echo hello
@@ -1213,26 +1213,26 @@ Make会自动查找makefile文件，查找顺序为GNUmakefile > makefile > Make
 
     .SILENT：main all
 
-<font color='red'>错误处理：</font>
- 如果一条规则中包含多条shell指令，每条指令执行完之后make都会检查返回状态，如果返回状态是0,则执行成功，继续执行下一条指令，直到最后一条指令执行完成。如果过程中发生了错误，即某一条的指令返回值不是0,那么make就会终止执行当前规则中剩下的shell指令。 <font color='red'>如果希望make忽视错误继续下一条指令，需要在指令开头添加 - </font>
+<mark>错误处理：<mark>
+ 如果一条规则中包含多条shell指令，每条指令执行完之后make都会检查返回状态，如果返回状态是0,则执行成功，继续执行下一条指令，直到最后一条指令执行完成。如果过程中发生了错误，即某一条的指令返回值不是0,那么make就会终止执行当前规则中剩下的shell指令。 <mark>如果希望make忽视错误继续下一条指令，需要在指令开头添加 - <mark>
 
 ### 16.6 变量
 Makefile中的变量有点类似与C语言中的宏定义，即用一个名称代替一串文本。Makefile的变量值是可以改变的。Makefile的变量值只有一种类型：字符串
 
-<font color='red'>变量定义：</font>
+<mark>变量定义：<mark>
 
     <变量名>=<变量值>  <变量名>:=<变量值>  <变量名>::=<变量值>
     变量名区分大小写，可以是任意字符串，不能含有“：”，“#”，“=”
     :=是立即展开，=是延迟展开
 
-<font color='red'>使用方式：</font>
+<mark>使用方式：<mark>
 
     $(<变量名>)  或者  ${<变量名>}
 
-<font color='red'>条件赋值：</font>
+<mark>条件赋值：<mark>
 a?=200代表如果变量a已经赋值，则跳过该语句，如果没有赋值，则赋值为200
 
-<font color='red'>定义多行变量：</font>
+<mark>定义多行变量：<mark>
 
     define <变量名>
     # 变量内容
@@ -1240,12 +1240,12 @@ a?=200代表如果变量a已经赋值，则跳过该语句，如果没有赋值�
 
 #undefine 变量名用于取消变量定义
 
-<font color='red'>变量替换引用：</font>
+<mark>变量替换引用：<mark>
     
     $(obj:.o=.cpp) 将变量obj后缀的.o替换为.cpp
     $(obj:%.o=%.cpp) 将变量obj后缀的.o替换为.cpp
 
-<font color='red'>自动变量：</font>
+<mark>自动变量：<mark>
 
     $@:本条规则的目标名
     $<:本条规则的第一个依赖名称
@@ -1257,19 +1257,19 @@ a?=200代表如果变量a已经赋值，则跳过该语句，如果没有赋值�
     $%:如果目标不是归档文件，则为空如果目标是归档文件成员，则为对应成员的文件名
 
 ### 16.7 多目标与多规则
-<font color='red'>独立多目标：</font>
+<mark>独立多目标：<mark>
 1.只需要写目标和依赖，不需要写方法时：
 
     block.o input.o scene.o : command.h
 2.生成目标的方法写法一样的，只是依赖与目标不一样，可以写在一行。
 
-<font color='red'>组合多目标：</font>
+<mark>组合多目标：<mark>
 多目标与依赖之前用&，这样的多个目标称为组合目标。与独立多目标的区别在于，独立多目标每个目标的更新都需要单独调一次更新方法。而组合多目标调用一次方法将更新所有目标。
 
 ### 16.8 静态模式
 独立多目标可以简化Makefile文件的写法，但是不利于将各个目标的依赖分开，让目标文件根据各自的依赖进行更新。静态模式可以在一定程度上改进依赖分开问题。
 
-<font color='red'>静态模式就是用%进行文件匹配来推倒出对应的依赖</font>
+<mark>静态模式就是用%进行文件匹配来推倒出对应的依赖<mark>
 
     target : target-pattern(目标模式): prereq-patterns(依赖模式)...
         recipe
@@ -1281,14 +1281,14 @@ a?=200代表如果变量a已经赋值，则跳过该语句，如果没有赋值�
 ### 16.9 指定依赖搜索路径
 make默认在Makefile文件所在的目录下查找依赖文件，如果找不到，就会报错。这时候就需要手动指定搜索路径，用VPATH或vpath指令。
 
-<font color='red'>VPATH用法：</font>
+<mark>VPATH用法：<mark>
 
     VPATH = <dir1>:<dir2>:<dir3>...
     例如：
     VPATH = include:src
     （多个目录之间用:隔开，这时make会在VPATH指定的这些文件目录里面查找依赖文件）
 
-<font color='red'>vpath用法：</font>
+<mark>vpath用法：<mark>
 vpath可以指定某个类型的文件在哪个目录搜索
 
     vapth <pattern> <directories>
@@ -1297,7 +1297,7 @@ vpath可以指定某个类型的文件在哪个目录搜索
     vpath % src        #所有文件都在src下查找
 
 ### 16.10 条件判断
-<font color='red'>ifdef：判断一个变量是否已定义</font>
+<mark>ifdef：判断一个变量是否已定义<mark>
 
     ifdef var
         echo $(var)
@@ -1305,143 +1305,143 @@ vpath可以指定某个类型的文件在哪个目录搜索
         echo no var
     endif
 
-<font color='red'>ifeq：判断两个值是否相等（这里的 值 指的是字符串）</font>
+<mark>ifeq：判断两个值是否相等（这里的 值 指的是字符串）<mark>
 
 ### 16.11 字符串处理函数
-<font color='red'>函数的调用用法：</font>
+<mark>函数的调用用法：<mark>
 
     $(function arguments) 或 ${function arguments}
     $(function arg1,$(arg2),arg3...) #参数之间不要有空格
 
-<font color='red'>subst：文本替换函数，返回替换后的文本</font>
+<mark>subst：文本替换函数，返回替换后的文本<mark>
 
     $(subst target,replacement,text)
     # 使用replacement替换text中的target
 
-<font color='red'>patsubst：模式替换，返回替换后的文本</font>
+<mark>patsubst：模式替换，返回替换后的文本<mark>
 
     $(patsubst pattern,replacement,text)
     # pattern：需要替换的模式
     # replacement:需要替换为
     # text:待处理内容，各项内容需要用空格隔开
 
-<font color='red'>strip：去除字符串头部和尾部的空格，中间如果有多个空格，用一个空格替换，返回去除空格后的文本</font>
+<mark>strip：去除字符串头部和尾部的空格，中间如果有多个空格，用一个空格替换，返回去除空格后的文本<mark>
 
     $(strip string)
     # string:需要取出空格的字符串
 
-<font color='red'>findstring：查找字符串，如果找到了，则返回对应的字符串，如果没找到，则返回空串</font>
+<mark>findstring：查找字符串，如果找到了，则返回对应的字符串，如果没找到，则返回空串<mark>
 
     $(findstring find,string)
     # find:需要查找的字符串
     # string:用来查找的内容
 
-<font color='red'>filter：从文本中筛选出符合模式的内容并返回</font>
+<mark>filter：从文本中筛选出符合模式的内容并返回<mark>
 
     $(filter pattern...,text)
     # pattern:模式，可以有多个，用空格隔开
     # text:用来筛选的文本，多项内容需要用空格隔开，否则只会当一项来处理
 
-<font color='red'>sort：将文本内的各项按字典顺序排列，并且移除重复项</font>
+<mark>sort：将文本内的各项按字典顺序排列，并且移除重复项<mark>
 
     $(sort list)
     # list:需要排列内容
 
-<font color='red'>word：用于返回文本中第n个单词</font>
+<mark>word：用于返回文本中第n个单词<mark>
 
     $(word n,text)
     # n:第n个单词，从1开始，如果n大于总单词数，则返回空串
     # text:待处理文本
 
-<font color='red'>wordlist：用于返回文本指定范围内的单词列表</font>
+<mark>wordlist：用于返回文本指定范围内的单词列表<mark>
 
     $(wordlist start,end,text)
     # start:起始位置，如果大于单词总数，则返回空串
     # end:结束位置，如果大于单词总数，则返回起始位置之后全部
 
-<font color='red'>words：返回文本中单词数</font>
+<mark>words：返回文本中单词数<mark>
 
     $(words text)
 
-<font color='red'>firstword：返回第一个单词</font>
+<mark>firstword：返回第一个单词<mark>
 
     $(firstword text)
 
-<font color='red'>lastword：返回最后一个单词</font>
+<mark>lastword：返回最后一个单词<mark>
 
     $(lastword text)
 
 ### 16.12 文件名处理函数
-<font color='red'>dir：返回文件目录（路径）</font>
+<mark>dir：返回文件目录（路径）<mark>
 
     $(dir files)
     # files:需要返回目录的文件名，可以有多个，用空格隔开
 
-<font color='red'>notdir：返回除目录部分的文件名</font>
+<mark>notdir：返回除目录部分的文件名<mark>
 
     $(notdir files)
     # files:需要返回文件列表，可以有多个，用空格隔开
 
-<font color='red'>suffix：返回文件后缀名，如果没有后缀则返回空</font>
+<mark>suffix：返回文件后缀名，如果没有后缀则返回空<mark>
 
     $(suffix files)
     # files:需要返回后缀的文件名，可以有多个，用空格隔开
 
-<font color='red'>basename：返回文件名除后缀的部分</font>
+<mark>basename：返回文件名除后缀的部分<mark>
 
     $(basename files)
     # files:需要返回后缀的文件名，可以有多个，用空格隔开
 
-<font color='red'>addsuffix：给文件名添加后缀</font>
+<mark>addsuffix：给文件名添加后缀<mark>
 
     $(addsuffix suffix,files)
     # suffix:需要添加的后缀
     # files:需要添加后缀的文件名，可以有多个，用空格隔开
 
-<font color='red'>addprefix：给文件名添加前缀</font>
+<mark>addprefix：给文件名添加前缀<mark>
 
     $(addprefix suffix,files)
     # suffix:需要添加的前缀
     # files:需要添加前缀的文件名，可以有多个，用空格隔开
 
-<font color='red'>join：将两个列表中的内容一对一连接，如果两个列表内容数量不相等，则多出来的部分原样返回</font>
+<mark>join：将两个列表中的内容一对一连接，如果两个列表内容数量不相等，则多出来的部分原样返回<mark>
 
     $(join list1,list2)
     # list1:第一个列表
     # list2:需要连接的第二个列表
 
-<font color='red'>wildcard：返回符合通配符的文件列表</font>
+<mark>wildcard：返回符合通配符的文件列表<mark>
 
     $(wildcard pattern)
     # pattern:通配符
 
-<font color='red'>realpath：返回文件的绝对路径</font>
+<mark>realpath：返回文件的绝对路径<mark>
 
     $(realpath files)
     # files:需要返回绝对路径的文件
 
-<font color='red'>abspath：返回文件的绝对路径.用法同realpath,如果一个文件名不存在，realpath不会返回内容，abspath则会返回一个当前文件夹下的绝对路径</font>
+<mark>abspath：返回文件的绝对路径.用法同realpath,如果一个文件名不存在，realpath不会返回内容，abspath则会返回一个当前文件夹下的绝对路径<mark>
 
     $(abspath files)
 
 ### 16.13 条件函数
-<font color='red'>if:条件判断，如果条件不是空串，则返回真的部分，否则返回假的部分</font>
+<mark>if:条件判断，如果条件不是空串，则返回真的部分，否则返回假的部分<mark>
 
     $(if condition,then-part[,else-part])
     # condition:条件部分
     # then-part:条件为真时执行的部分
     # else-part:条件为假时执行的部分，如果省略则为假时返回空串
 
-<font color='red'>or:返回条件中第一个不为空的部分</font>
+<mark>or:返回条件中第一个不为空的部分<mark>
 
     $(or condition1[,condition2[,condition3...]])
 
-<font color='red'>and:如果条件中有一个为空串，则返回空，如果全都不为空，则返回最后一个条件</font>
+<mark>and:如果条件中有一个为空串，则返回空，如果全都不为空，则返回最后一个条件<mark>
 
     $(and condition1[,condition2[,condition3...]])
 
 ### 16.14 其他函数
-<font color='red'>file:读写文件</font>
+<mark>file:读写文件<mark>
 
     $(file op filename[,text])
     # op : 操作
@@ -1451,40 +1451,40 @@ vpath可以指定某个类型的文件在哪个目录搜索
     # filename : 需要操作的文件名
     # text : 写入的文本内容，读取是不需要这个参数的
 
-<font color='red'>foreach:对一列用空格隔开的字符序列中每一项进行处理，并返回处理后的列表</font>
+<mark>foreach:对一列用空格隔开的字符序列中每一项进行处理，并返回处理后的列表<mark>
 
     $(foreach each,list,process)
     # each : list中的每一项
     # list : 需要处理的字符串序列，用空格隔开
     # process : 需要对每一项进行的处理
 
-<font color='red'>call:将一些复杂的表达式写成一个变量，用call可以像调用函数一样进行调用。类似于编程语言中的自定义函数。在函数中可以用$(n)来访问第n个参数</font>
+<mark>call:将一些复杂的表达式写成一个变量，用call可以像调用函数一样进行调用。类似于编程语言中的自定义函数。在函数中可以用$(n)来访问第n个参数<mark>
 
     $(call funcname,param1,param2...)
     # funcname : 自定义函数名
     # 参数至少一个，可以有多个，用逗号隔开
 
-<font color='red'>value:对于不是立即展开的变量，可以查看变量的原始定义，对于立即展开的变量，直接返回变量值</font>
+<mark>value:对于不是立即展开的变量，可以查看变量的原始定义，对于立即展开的变量，直接返回变量值<mark>
 
     $(value variable)
 
-<font color='red'>origin:查看一个变量的定义来源</font>
+<mark>origin:查看一个变量的定义来源<mark>
 
     $(origin variable)
 
-<font color='red'>flavor:查看一个变量的赋值方式</font>
+<mark>flavor:查看一个变量的赋值方式<mark>
 
     $(flavor variable)
 
-<font color='red'>eval:可以将一段文本生成Makefile的内容</font>
+<mark>eval:可以将一段文本生成Makefile的内容<mark>
 
     $(eval variable)
 
-<font color='red'>shell:用于执行shell命令</font>
+<mark>shell:用于执行shell命令<mark>
 
     $(shell ls *.cpp)
 
-<font color='red'>let:将一个字符串序列中项拆开放入多个变量中，并对各个变量进行操作（GUN make4.4以上版本）</font>
+<mark>let:将一个字符串序列中项拆开放入多个变量中，并对各个变量进行操作（GUN make4.4以上版本）<mark>
 
     $(let var1 [var2...],[list],proc)
     # var : 变量，可以有多个，用空格隔开
@@ -1492,15 +1492,15 @@ vpath可以指定某个类型的文件在哪个目录搜索
     # proc : 对变量进行的操作，结果为let的返回值
 
 ### 16.15 信息提示函数
-<font color='red'>error:提示错误信息并终止make执行</font>
+<mark>error:提示错误信息并终止make执行<mark>
 
     $(error text)
     # text : 提示信息
 
-<font color='red'>warning:提示警告信息，make不会终止</font>
+<mark>warning:提示警告信息，make不会终止<mark>
 
     $(warning text)
 
-<font color='red'>info:输出一些信息</font>
+<mark>info:输出一些信息<mark>
 
     $(info text...)
