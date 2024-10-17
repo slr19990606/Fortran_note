@@ -69,8 +69,7 @@ Fortran语句大致有三种类型：
     例： Real(Kind=8) , parameter , private :: rVar = 20.0d0
          Character(Len=32) , Intent(In) :: cStr(5,8)
 
-<font color=“red”> 注意： 如果定义时同时赋值，则默认具有save属性，需书写双冒号 </font>
-<font color=red>我是红色</font>
+<mark> 注意： 如果定义时同时赋值，则默认具有save属性，需书写双冒号 <mark>
 
 ## 4.语法之数据类型与浮点数
 ### 4.1 数据类型
