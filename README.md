@@ -330,7 +330,7 @@ do while 循环结构：（当满足条件时一直循环）
     TYPE%MEM
 
 例子：
-![demo](./struct_demo.jpg)
+![demo](./fortran_pic/struct_demo.jpg)
 
 定义结构体时，内存中存储参数的顺序不一定是我们写的参数的顺序，可以加上SEQUENCE命令，保证顺序一致。
 
@@ -485,11 +485,11 @@ Module可以被继承，即modA可以usemodB，从而获得modB向外提供的�
 <mark>统一接口：<mark>
 利用统一接口可以把多个子程序捆绑成一个名字，由编译器根据实参的情况，决定到底调用哪一个。
 
-![demo](./picture/fortran_pic/interface_demo.jpg)
+![demo](./fortran_pic/interface_demo.jpg)
 
 <mark>自定义操作符<mark>
 
-![demo](./picture/fortran_pic/operator_demo.jpg)
+![demo](./fortran_pic/operator_demo.jpg)
 
 ## 9 文件读写
 ### 9.1 文件和路径
@@ -988,7 +988,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     参数s:创建目标文件索引，这在创建较大的库时能加快时间
     参数r:在库中间插入模块(替换)，默认新的成员添加在库的结尾处，如果模块名已经在库中存在，则替换同名的模块
 
-![demo](./picture/fortran_pic/lib_process.png)
+![demo](./fortran_pic/lib_process.png)
 
 <mark>生成静态库的具体步骤：<mark>
 
@@ -1013,7 +1013,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     -fPIC(-fpic)参数的作用是使得gcc生成的代码是与位置无关的，也就是使用相对位置
     -shared参数的作用是告诉编译器生成一个动态链接库
 
-![demo](./picture/fortran_pic/dll_process.png)
+![demo](./fortran_pic/dll_process.png)
 
 <mark>生成动态库的具体步骤：<mark>
 
@@ -1109,7 +1109,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     1.相同的库文件数据可能在内存中被加载多份，消耗系统资源，浪费内存
     2.库文件更新需要重新编译项目文件，生成新的可执行程序，浪费时间
 
-![demo](./picture/fortran_pic/lib_disadvantage.png)
+![demo](./fortran_pic/lib_disadvantage.png)
 
 #### 15.5.2 动态库
 <mark>优点：<mark>
@@ -1123,7 +1123,7 @@ GCC编译器对程序的编译分为4个阶段：预处理(预编译)、编译�
     1.加载速度比静态库慢，以现在计算机的性能可以忽略
     2.发布程序需要提供依赖的动态库
 
-![demo](./picture/fortran_pic/dll_disadvantage.png)
+![demo](./fortran_pic/dll_disadvantage.png)
 
 ## 16 Makefile 文件
 一个Makefile文件由一条一条的规则构成，一条规则结构如下：
