@@ -330,7 +330,7 @@ do while 循环结构：（当满足条件时一直循环）
     TYPE%MEM
 
 例子：
-![demo](./picture/fortran_pic/struct_demo.jpg)
+![demo](./struct_demo.jpg)
 
 定义结构体时，内存中存储参数的顺序不一定是我们写的参数的顺序，可以加上SEQUENCE命令，保证顺序一致。
 
